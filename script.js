@@ -1,29 +1,5 @@
 'use strict';
-// to check if its selected
 
-// // We can select the whole body
-// console.log(document.querySelector('body'));
-
-// // Or the specific
-// console.log(document.querySelector('.message'));
-
-// // We can try changing the textcontent of the message
-// document.querySelector('.message').textContent = 'Correct Number!';
-
-// // We can also store the value first before changing
-// const message = document.querySelector('.message');
-// message.textContent = 'Correct Number!!!';
-
-// // Let's Try that again
-// const secretNumber = document.querySelector('.number');
-// secretNumber.textContent = 4;
-
-// // Use Value to change the value
-// const guess = document.querySelector('.guess');
-// guess.value = 4;
-
-// Let's now learn about the event listener
-// First choose the element we want to add event listener
 const messageContainer = document.querySelector('.message');
 
 const messageMaker = function (message) {
@@ -35,25 +11,21 @@ const scoreContainer = document.querySelector('.score');
 
 const body = document.querySelector('body');
 const secretNumberContainer = document.querySelector('.number');
-let secretNumber = Math.trunc(Math.random() * 3 + 1);
+let secretNumber = Math.trunc(Math.random() * 20 + 1); // Changed from * 3 + 1 to * 20 + 1
 
 let score = 20;
 let highscore = 0;
 
 document.querySelector('.check').addEventListener('click', function () {
-  // we need to get the value inside input when we click check
   const guess = document.querySelector('.guess').value;
   const guessToNum = Number(guess);
   console.log(guessToNum);
-
-  // we need to add validation if guess is empty
-  const guessType = typeof guessToNum;
 
   if (!guess) {
     messageMaker('⛔️ Not number!');
   } else if (guessToNum === secretNumber) {
     // if player wins
-    messageMaker('🎉Correct Number!'); // for the highScore
+    messageMaker('🎉Correct Number!');
     if (score > highscore) {
       highscore = score;
       highscoreContainer.textContent = `${highscore}`;
@@ -62,7 +34,6 @@ document.querySelector('.check').addEventListener('click', function () {
     // change the style of the page if correct
     body.style.backgroundColor = 'red';
     secretNumberContainer.style.width = '30rem';
-
     secretNumberContainer.textContent = secretNumber;
   } else if (guessToNum > secretNumber) {
     if (score > 1) {
@@ -85,15 +56,12 @@ document.querySelector('.check').addEventListener('click', function () {
   }
 });
 
-
 document.querySelector('.again').addEventListener('click', function () {
   // Reset game state
-  secretNumber = Math.trunc(Math.random() * 3 + 1);
+  secretNumber = Math.trunc(Math.random() * 20 + 1); // Changed from * 3 + 1 to * 20 + 1
   score = 20;
 
-  highscoreContainer.textContent = highscore;
   scoreContainer.textContent = score;
-
   document.querySelector('.guess').value = '';
   secretNumberContainer.textContent = '?';
 
