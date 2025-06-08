@@ -53,14 +53,11 @@ document.querySelector('.check').addEventListener('click', function () {
     messageMaker('⛔️ Not number!');
   } else if (guessToNum === secretNumber) {
     // if player wins
-    messageMaker('🎉Correct Number!');
-
-    // for the highScore
+    messageMaker('🎉Correct Number!'); // for the highScore
     if (score > highscore) {
       highscore = score;
       highscoreContainer.textContent = `${highscore}`;
     }
-    score = 20;
 
     // change the style of the page if correct
     body.style.backgroundColor = 'red';
@@ -69,7 +66,7 @@ document.querySelector('.check').addEventListener('click', function () {
     secretNumberContainer.textContent = secretNumber;
   } else if (guessToNum > secretNumber) {
     if (score > 1) {
-      messageMaker(`📉 Too low!`);
+      messageMaker(`📈 Too high!`);
       score--;
       scoreContainer.textContent = score;
     } else {
@@ -88,11 +85,11 @@ document.querySelector('.check').addEventListener('click', function () {
   }
 });
 
-//Let's now make a again button functional
 
 document.querySelector('.again').addEventListener('click', function () {
-  // tommorow
+  // Reset game state
   secretNumber = Math.trunc(Math.random() * 3 + 1);
+  score = 20;
 
   highscoreContainer.textContent = highscore;
   scoreContainer.textContent = score;
